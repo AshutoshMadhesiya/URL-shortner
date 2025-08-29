@@ -12,7 +12,7 @@ function App() {
       <Navbar page={page} setPage={setPage} />
 
       {/* Page Content */}
-      <div className="pt-16">
+      <div>
         {page === "home" && <Home />}
         {page === "analytics" && <Analytics />}
       </div>

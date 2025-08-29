@@ -76,8 +76,16 @@ const Analytics = () => {
             </p>
             <p>
               <span className="font-semibold">Short URL: </span>
-              {`${import.meta.env.VITE_BASE_URL}/${analytics.shortUrl}`}
+              <a
+                href={`${import.meta.env.VITE_BASE_URL}/${analytics.shortUrl}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-600 font-medium hover:underline"
+              >
+                {`${import.meta.env.VITE_BASE_URL}/${analytics.shortUrl}`}
+              </a>
             </p>
+
             <p>
               <span className="font-semibold">Created At: </span>
               {new Date(analytics.createdAt).toLocaleString()}
@@ -88,18 +96,24 @@ const Analytics = () => {
             </p>
 
             {/* Table of visits */}
+            {/* Table of visits */}
             <div>
               <h2 className="font-semibold mb-2">Visit History:</h2>
               {analytics.visitedHistory.length === 0 ? (
                 <p className="text-gray-500">No visits yet</p>
               ) : (
-                <ul className="list-disc pl-6 space-y-1">
-                  {analytics.visitedHistory.map((visit) => (
-                    <li key={visit._id}>
-                      {new Date(visit.date).toLocaleString()}
-                    </li>
-                  ))}
-                </ul>
+                <div className="max-h-48 overflow-y-auto border rounded-lg p-3 bg-gray-50">
+                  <ul className="list-disc pl-6 space-y-1">
+                    {analytics.visitedHistory
+                      .slice() // show only last 8 entries
+                      .reverse() // so newest appears at top
+                      .map((visit) => (
+                        <li key={visit._id}>
+                          {new Date(visit.date).toLocaleString()}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               )}
             </div>
           </div>

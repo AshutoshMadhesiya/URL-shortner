@@ -1,12 +1,10 @@
 const express = require('express');
 const connectDB = require('./mongodb/connect');
-// const dotenv = require('dotenv');
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 8000;
 const urlRoutes = require('./routes/urlRoute');
 
-// dotenv.config();
 connectDB();
 
 app.use(cors());
